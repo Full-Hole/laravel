@@ -16,3 +16,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/hello/{name}', function(string $name) {
+    return "Hello, $name";
+});
+
+Route::get('/about', function() {
+    return "Some Thing About Me";
+});
+
+Route::get('/news', function() {
+    return "Some News About Site";
+});
+
+Route::get('/info', function() {
+    return phpinfo();
+});
