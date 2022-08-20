@@ -14,7 +14,8 @@
         @forelse ($categoryList as $key => $category)
         <tr>
             <td>{{$key}}</td>
-            <td>{{$$category['name']}}</td>            
+            <td>{{$category['name']}}</td>      
+            <td>      
             <a href="{{ route('admin.categories.edit', ['category' => $key]) }}" class="btn btn-sm btn-outline-primary">Edit</a>
             <a href="" class="btn btn-sm btn-outline-danger">Delete</a>
         </td>
