@@ -10,6 +10,7 @@
         <th scope="col">Автор</th>
         <th scope="col">Статус</th>
         <th scope="col">Дата</th>
+        <th scope="col">Управление</th>
         
       </tr>
     </thead>
