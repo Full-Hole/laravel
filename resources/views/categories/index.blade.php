@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('title')
-    Список новостей
+    Список категорий
     @parent
 @endsection
 @section('content')
