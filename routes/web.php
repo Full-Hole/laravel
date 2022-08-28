@@ -25,6 +25,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 
+Route::get('/feedback', [FeedBackController::class, 'index'])
+->name('feedback.index');
+
+Route::get('/upload', [UploadController::class, 'index'])
+->name('upload.index');
+
+Route::get('/info', function() {
+    return phpinfo();
+});
+
 Route::get('/hello/{name}', function(string $name) {
     return "Hello, $name";
 });
@@ -33,7 +43,7 @@ Route::get('/about', function() {
     return "Some Thing About Me";
 });
 Route::get('/categories', [CategoryController::class, 'index'])
-->name('categories.index');;
+->name('categories.index');
 
 Route::get('/categories/{name}', [CategoryController::class, 'show'])
 ->where('name', '\w+')
@@ -45,9 +55,7 @@ Route::get('/news/{id}', [NewsController::class, 'show'])
 ->where('id', '\d+')
 ->name('news.show');
 
-Route::get('/info', function() {
-    return phpinfo();
-});
+
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::get('/', AdminIndexController::class)
