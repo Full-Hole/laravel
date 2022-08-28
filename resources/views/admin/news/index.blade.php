@@ -1,7 +1,10 @@
 @extends('layouts.admin')
 @section('content')
 <h2>Список новостей</h2>
+
 <div class="table-responsive">
+  @include('inc.message', ['message' => 'Error From index'])
+  <a href="{{ route('admin.news.create')}}" style="float: right;" class="btn btn-primary">Добавить Новость</a>
   <table class="table table-striped table-sm">
     <thead>
       <tr>

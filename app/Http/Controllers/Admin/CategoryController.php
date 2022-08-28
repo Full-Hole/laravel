@@ -37,7 +37,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => ['required', 'string', 'min:5', 'max:150']
+        ]);
+
+        return response()->json($request->only(['title', 'description'] ));
     }
 
     /**
