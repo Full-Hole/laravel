@@ -17,12 +17,13 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('title',255);
-            $table->string('Author',150);
+            $table->string('author',150);
             $table->enum('status',[
                 News::DRAFT, News::ACTIVE, News::BLOCKED
-            ])->default(News::DRAFT);
-            $table->dateTime('Release Day');
-            $table->text('body');
+            ])->default(News::DRAFT);            
+            $table->text('description');
+            $table->string('image',255)->nullable();
+            $table->dateTime('released_at');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class CategoryController extends Controller
         // return "Новость № $id";
         $news = $this -> getNews();        
         return view('categories.show', [
-            'name' => $name,
+            'title' => $name,
             'newsList' => $news
         ]);
 
