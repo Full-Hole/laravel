@@ -18,7 +18,11 @@ class News extends Model
 
     public function getNews()
     {
-        return DB::select("select * from {$this->table}");
+        // return DB::select("select * from {$this->table}");
+        return DB::table($this->table)
+        ->join('categories', "{$this->table}.category_id", '=', 'categories.id')
+        ->select("{$this->table}.*", 'categories.title as categoryTitle')
+        ->get();
     }
 
     public function getActiveNews()
