@@ -10,17 +10,19 @@
                     <th scope="col">#</th>
                     <th scope="col">Наименование</th>
                     <th scope="col">Описание</th>
+                    <th scope="col">Дата создания</th>
                     <th scope="col">Управление</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($categoryList as $key => $category)
+                @forelse ($categories as $category)
                     <tr>
-                        <td>{{ $key }}</td>
-                        <td>{{ $category['title'] }}</td>
-                        <td>DRAFT</td>
+                        <td>{{ $category->id  }}</td>
+                        <td>{{ $category->title }}</td>
+                        <td>{{ $category->description }}</td>
+                        <td>{{ $category->created_at }}</td>
                         <td>
-                            <a href="{{ route('admin.categories.edit', ['category' => $key]) }}"
+                            <a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}"
                                 class="btn btn-sm btn-outline-primary">Edit</a>
                             <a href="" class="btn btn-sm btn-outline-danger">Delete</a>
                         </td>

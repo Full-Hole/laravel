@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index(){
         //return "Страница новостей";
-        $categories = $this -> getCategories();
+        $categories = app(Category::class)->getCategories();
+        
         return view('categories.index', [
-            'categoryList' => $categories
+            'categories' => $categories
         ]);
 
     }
 
     public function show(string $name){
-        // return "Новость № $id";
-        $news = $this -> getNews();        
+        // return "Новость № $id";  
+        $cat = app(Category::class)->getCategoryByName($name);
+        $news = app(News::class)->getNewsByCategoryId($cat->id);
+          
         return view('categories.show', [
             'title' => $name,
             'newsList' => $news

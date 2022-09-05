@@ -33,7 +33,8 @@ class NewsSeeder extends Seeder
                 'status' => News::DRAFT,
                 'image' => $faker -> imageUrl(),
                 'description' => $faker->text(150),
-                'released_at' => now('Europe/Moscow')
+                'released_at' => now('Europe/Moscow'),
+                'created_at' => now('Europe/Moscow')
             ];
         }
         return $news;

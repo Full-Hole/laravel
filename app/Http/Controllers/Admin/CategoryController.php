@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,9 +15,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
+       
+        $categories = app(Category::class)->getCategories();
+        // dd($categories);
         return view('admin.categories.index', [
-            'categoryList' => $this -> getCategories()
-        ]);       
+            'categories' => $categories
+        ]);      
+     
     }
 
     /**
@@ -37,10 +42,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $request->validate([
             'title' => ['required', 'string', 'min:5', 'max:150']
         ]);
-
+        
         return response()->json($request->only(['title', 'description'] ));
     }
 
@@ -63,7 +69,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.categories.edit');
+        $category = app(Category::class)->getCategoryById($id);
+        return view('admin.categories.edit', [
+            'category' => $category
+        ]);
     }
 
     /**
