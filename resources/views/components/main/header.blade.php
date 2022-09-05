@@ -9,9 +9,12 @@
           <div class="col-sm-4 offset-md-1 py-4">
             <h4 class="text-white">Контакты</h4>
             <ul class="list-unstyled">
-              <li><a href="#" class="text-white">Follow on Twitter</a></li>
-              <li><a href="#" class="text-white">Like on Facebook</a></li>
-              <li><a href="#" class="text-white">Подпишись на рассылку</a></li>
+              <li><a href="{{ route('admin.news.index')}}">Link to Admin Page</a></li>
+              <li><a href="{{ route('feedback.index')}}" class="text-white">Оставить отзыв</a></li>
+              <li><a href="{{ route('upload.index')}}" class="text-white">Запросить данные</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="{{ route('news.index')}}">News</a></li>
+              <li><a href="{{ route('categories.index')}}">Categories</a></li>        
             </ul>
           </div>
         </div>
