@@ -1,13 +1,13 @@
 @extends('layouts.main')
 @section('title')
-{{ $news['title'] }}
+{{ $news->title }}
 @parent
 @endsection
 @section('content')
 <div style="border: 1px solid red;">
-    <h2>{{ $news['title'] }}</h2>
-    <p>{{ $news['author'] }} - {{ $news['created_at']->format('d-m-Y H:i') }}</p>
-    <p>{{ $news['description'] }}</p>
+    <h2>{{ $news->title }}</h2>
+    <p>{{ $news->author }} - {{ $news->created_at}}</p>
+    <p>{{ $news->description }}</p>
 </div>
 @endsection
 

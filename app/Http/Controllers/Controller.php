@@ -36,7 +36,8 @@ class Controller extends BaseController
         $faker = Factory::create();
         for($i=1; $i < 10; $i++){
             $categories[$i] = [
-                'name' => $faker -> word(),
+                'title' => $faker -> word(),
+                'description' => $faker->text(100)
             ];
         }       
         return $categories;
