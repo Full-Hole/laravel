@@ -16,7 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
        
-        $categories = app(Category::class)->getCategories();
+        // $categories = app(Category::class)->getCategories();
+        $categories= Category::all();
         // dd($categories);
         return view('admin.categories.index', [
             'categories' => $categories
@@ -46,7 +47,7 @@ class CategoryController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'min:5', 'max:150']
         ]);
-        
+        dd($request);
         return response()->json($request->only(['title', 'description'] ));
     }
 
@@ -64,12 +65,14 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Category $category 
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = app(Category::class)->getCategoryById($id);
+        // $category = Category::findOrFail($id);
+        // $category = app(Category::class)->getCategoryById($id);
+        
         return view('admin.categories.edit', [
             'category' => $category
         ]);

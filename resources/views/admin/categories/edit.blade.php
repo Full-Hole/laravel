@@ -12,7 +12,7 @@
                 <label for="description">Описание</label>
                 <textarea name="description" id="description" cols="30" rows="5" class="form-control">{!! $category->description !!}</textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a type="submit" class="btn btn-primary">Сохранить</button>
         </form>
     </div>
 @endsection
