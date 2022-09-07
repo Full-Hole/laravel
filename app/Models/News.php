@@ -11,6 +11,7 @@ class News extends Model
     use HasFactory;
 
     protected $table ='news';
+    protected $dates = ['released_at'];
 
     public const DRAFT = 'DRAFT';
     public const ACTIVE = 'ACTIVE';

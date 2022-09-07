@@ -2,6 +2,7 @@
 @section('content')
     <h2>Список категорий</h2>
     <div class="table-responsive">
+        @include('inc.message')
         <table class="table table-striped table-sm">
             <a href="{{ route('admin.categories.create') }}" style="float: right;" class="btn btn-primary">Добавить
                 Категорию</a>

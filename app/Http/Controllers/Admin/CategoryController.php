@@ -43,12 +43,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+       // dd($request);
         $request->validate([
             'title' => ['required', 'string', 'min:5', 'max:150']
         ]);
-        dd($request);
-        return response()->json($request->only(['title', 'description'] ));
+        //dd($request);
+        // $data= $request->only(['title', 'description']);
+
+        $category = new Category();
+        // $news->title = $data['title'];
+        $category->title = $request->input('title');
+        // $news->description = $data['description'];
+        $category->description =  $request->input('description');
+        // return response()->json($request->only(['title', 'description'] ));
+        if($category->save()) {
+            return redirect()->route('admin.categories.index')->with('success', 'Запись успешно добавлена');
+        }
+        return back()->with('error', 'Не удалось добавить запись');
     }
 
     /**
@@ -82,12 +93,22 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        
+        $category->title = $request->input('title');
+       
+        $category->description = $request->input('description');
+       
+        if($category->save()) {
+            
+            return redirect()->route('admin.categories.index')->with('success', 'Запись успешно обновлена');
+        }
+        
+        return back()->with('error', 'Не удалось обно вить запись');
     }
 
     /**
