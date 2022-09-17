@@ -23,7 +23,7 @@ return new class extends Migration
             ])->default(News::DRAFT);            
             $table->text('description');
             $table->string('image',255)->nullable();
-            $table->timestamp('released_at');
+            $table->timestamp('released_at')->nullable();
             $table->timestamps();
         });
     }

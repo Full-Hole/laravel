@@ -47,16 +47,16 @@ class NewsController extends Controller
         ]);
 
         // return response()->json($request->only(['title', 'description'] ));
-        $news = new News(
-            $request->only(['title','description','category_id','author','status','image'])
-        );        
-        // $news->title = $request->input('title');
-        // $news->description =  $request->input('description');
-        // $news->category_id = $request->input('category_id');
-        // $news->author = $request->input('author');
-        // $news->status = $request->input('status');
-        // $news->image = $request->input('image');
-        // $news->released_at = date("Y-m-d H:i:s");
+        $news = new News();
+        //     $request->only(['title','description','category_id','author','status','image','released_at'])
+        // );        
+        $news->title = $request->input('title');
+        $news->description =  $request->input('description');
+        $news->category_id = $request->input('category_id');
+        $news->author = $request->input('author');
+        $news->status = $request->input('status');
+        $news->image = $request->input('image');
+        $news->released_at = date("Y-m-d H:i:s");
         if($news->save()) {
             return redirect()->route('admin.news.index')->with('success', 'Запись успешно добавлена');
         }

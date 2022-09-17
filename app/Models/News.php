@@ -12,6 +12,7 @@ class News extends Model
 
     protected $table ='news';
     protected $dates = ['released_at'];
+    protected $fillable =['title','description','category_id','author','status','image', 'released_at'];
 
     public const DRAFT = 'DRAFT';
     public const ACTIVE = 'ACTIVE';
