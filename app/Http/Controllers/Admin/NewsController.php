@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
 use App\Queries\NewsQueryBuilder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -15,10 +16,10 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(NewsQueryBuilder $builder)
     {
         return view('admin.news.index', [
-            'newsList' => News::all()
+            'newsList' => $builder->getnews()
         ]);        
     }
 
@@ -41,13 +42,13 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, NewsQueryBuilder $buider)
+    public function store(Request $request, NewsQueryBuilder $builder)
     {
         $request->validate([
             'title' => ['required', 'string', 'min:5', 'max:150']
         ]);
 
-        $news - $buider->create(
+        $news = $builder->create(
             $request->only(['title','description','category_id','author','status','image','released_at'])
         );
 
@@ -64,7 +65,7 @@ class NewsController extends Controller
         // $news->status = $request->input('status');
         // $news->image = $request->input('image');
         // $news->released_at = date("Y-m-d H:i:s");
-        if($news->save()) {
+        if($news) {
             return redirect()->route('admin.news.index')->with('success', 'Запись успешно добавлена');
         }
         return back()->with('error', 'Не удалось добавить запись');
@@ -105,18 +106,20 @@ class NewsController extends Controller
      * @param  News  $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(Request $request, News $news, NewsQueryBuilder $builder): RedirectResponse 
     {
        
-        $news->title = $request->input('title');
-        $news->description =  $request->input('description');
-        $news->category_id = $request->input('category_id');
-        $news->author = $request->input('author');
-        $news->status = $request->input('status');
-        $news->image = $request->input('image');
-       // dd($request ->input("release"));
-        $news->released_at = strtotime($request ->input("release"));
-        if($news->save()) {
+    //     $news->title = $request->input('title');
+    //     $news->description =  $request->input('description');
+    //     $news->category_id = $request->input('category_id');
+    //     $news->author = $request->input('author');
+    //     $news->status = $request->input('status');
+    //     $news->image = $request->input('image');
+    //    // dd($request ->input("release"));
+    //     $news->released_at = strtotime($request ->input("release"));
+        if($builder->update(
+            $news,
+            $request->only(['title','description','category_id','author','status','image','released_at']))) {
             return redirect()->route('admin.news.index')->with('success', 'Запись успешно обновлена');
         }
         return back()->with('error', 'Не удалось обновить запись');

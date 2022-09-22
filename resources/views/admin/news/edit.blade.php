@@ -48,7 +48,8 @@
             <div class="form-group">
                 <label for="release">Дата релиза</label>
                 
-                <input type="datetime-local" class="form-control" name="release" id="release" value="{{$news->released_at->format('Y-m-d\TH:i:s')}}">
+                <input type="datetime-local" class="form-control" name="release" id="release" value="{{$news->released_at}}">
+                {{-- ->format('Y-m-d\TH:i:s') --}}
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Сохранить</button>
