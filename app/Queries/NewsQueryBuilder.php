@@ -21,6 +21,11 @@ final class NewsQueryBuilder
         return $this->model->with('category')->paginate(config('pagination.admin.news'));
     }
 
+    public function getNewsById(int $id): object
+    {
+        return $this->model->findOrFail($id);
+    }
+
     public function create(array $data): News | bool
     {
         return News::create($data);
@@ -30,5 +35,12 @@ final class NewsQueryBuilder
     {
         return $news->fill($data)->save();
     }
+
+    public function delete(int $id): bool
+    {
+        $news = $this->model->find($id);
+        return $news->delete();
+    }
+
 
 }

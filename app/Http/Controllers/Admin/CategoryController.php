@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Queries\CategoryQueryBuilder;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,14 +14,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(CategoryQueryBuilder $builder)    {
        
         // $categories = app(Category::class)->getCategories();
-        $categories= Category::all();
-        // dd($categories);
+        
         return view('admin.categories.index', [
-            'categories' => $categories
+            'categories' => $builder->getCategories()
         ]);      
      
     }

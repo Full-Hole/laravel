@@ -132,8 +132,12 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id, NewsQueryBuilder $builder)
     {
-        //
+        dd('123');
+        if($builder->delete($id))
+            return back()->with('success', 'Запись успешно удалена');
+
+        return back()->with('error', 'Не удалось удалить запись');
     }
 }

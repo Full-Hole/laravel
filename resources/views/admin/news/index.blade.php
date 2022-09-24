@@ -32,7 +32,7 @@
             <td>{{ $news->created_at->format('d-m-Y H:i')}}</td>
             <td>
             <a href="{{ route('admin.news.edit', ['news' => $news['id']]) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-            <a href="" class="btn btn-sm btn-outline-danger">Delete</a>
+            <a href="{{ route('admin.news.destroy', ['news' => $news['id']]) }}" class="btn btn-sm btn-outline-danger">Delete</a>
         </td>
         </tr>        
         @empty
