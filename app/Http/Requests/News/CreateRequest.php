@@ -25,12 +25,30 @@ class CreateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'min:3','max:100'],
-            'category_id' => ['required', 'numeric', 'exists:categories,id'],
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
             'description' => ['required', 'string', 'min:3','max:200'],
             'author' => ['required', 'string', 'min:2','max:30'],
             'status' => ['required', 'string', 'min:5', 'max:7'],
             'image' => ['nullable', 'image', 'mimes:jpg,png'],
             'released_at' => ['required', 'date']
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'title' => 'Заголовок',
+            'author' => 'Автор',
+            'category_id' => 'Категория',
+            'released_at' => 'Дата релиза'
+        ];
+
+    }
+
+    public function messages()
+    {
+        return [
+            'min' => 'Значение в поле :attribute должно быть не меньше чем :min символа'
         ];
     }
 }

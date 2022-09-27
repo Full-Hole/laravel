@@ -68,9 +68,9 @@ class NewsController extends Controller
         // $news->image = $request->input('image');
         // $news->released_at = date("Y-m-d H:i:s");
         if($news) {
-            return redirect()->route('admin.news.index')->with('success', 'Запись успешно добавлена');
+            return redirect()->route('admin.news.index')->with('success', __('messages.admin.news.create.success'));
         }
-        return back()->with('error', 'Не удалось добавить запись');
+        return back()->with('error', __('messages.admin.news.create.fail'));
     }
 
     /**
@@ -123,9 +123,9 @@ class NewsController extends Controller
             $news,
             $request->validated()))
             {
-            return redirect()->route('admin.news.index')->with('success', 'Запись успешно обновлена');
+            return redirect()->route('admin.news.index')->with('success', __('messages.admin.news.update.success'));
         }
-        return back()->with('error', 'Не удалось обновить запись');
+        return back()->with('error', __('messages.admin.news.update.fail'));
     
     }
 
