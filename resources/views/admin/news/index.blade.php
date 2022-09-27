@@ -32,7 +32,7 @@
             <td>{{ $news->created_at->format('d-m-Y H:i')}}</td>
             <td>
             <a href="{{ route('admin.news.edit', ['news' => $news['id']]) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-            <a href="{{ route('admin.news.destroy', ['news' => $news['id']]) }}" class="btn btn-sm btn-outline-danger">Delete</a>
+            <a href="javascript:" class="btn btn-sm btn-outline-danger delete" rel="{{$news->id}}">Delete</a>
         </td>
         </tr>        
         @empty
@@ -45,3 +45,34 @@
 </div>
 
 @endsection
+@push('js')
+  <script type="text/javascript">
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      
+      let delBtn = document.querySelectorAll(".delete");
+      delBtn.forEach(element => {
+        
+        element.addEventListener("click", ()=>{
+          const id = element.getAttribute('rel');
+          if(confirm('Удалить?'))
+          {            
+            remElement(`/admin/news/${id}`).then(()=>{
+              location.reload()
+            })
+          }
+          });
+      });
+    });
+    async function remElement(url) {
+      let response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          } 
+        });
+        let result = await response.json();
+        return result.ok;
+      }
+  </script>
+@endpush
