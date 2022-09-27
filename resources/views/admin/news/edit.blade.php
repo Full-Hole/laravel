@@ -2,12 +2,8 @@
 @section('content')
     <h2>Редактировать Новость</h2>
 
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            @include('inc.message', ['vmessage' => $error])
-        @endforeach
-        
-    @endif
+    @include('inc.message')
+
     <div class="offset-2 col-8">
         <form method="post" action="{{ route('admin.news.update', ['news' => $news])}}">
             @csrf
@@ -46,9 +42,9 @@
                 <input type="file" class="form-control" name="image" id="image" value="{{$news->image}}">
             </div>
             <div class="form-group">
-                <label for="release">Дата релиза</label>
+                <label for="released_at">Дата релиза</label>
                 
-                <input type="datetime-local" class="form-control" name="release" id="release" value="{{$news->released_at}}">
+                <input type="datetime-local" class="form-control" name="released_at" id="released_at" value="{{$news->released_at}}">
                 {{-- ->format('Y-m-d\TH:i:s') --}}
             </div>
             <br>

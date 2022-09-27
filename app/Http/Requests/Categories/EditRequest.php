@@ -11,9 +11,9 @@ class EditRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize():bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,11 @@ class EditRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'min:3','max:100'],
+            'description' => ['nullable', 'string']
         ];
     }
 }

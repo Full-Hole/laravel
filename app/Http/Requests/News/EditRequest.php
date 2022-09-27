@@ -13,7 +13,7 @@ class EditRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class EditRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required', 'string', 'min:3','max:100'],
+            'category_id' => ['required', 'numeric', 'exists: categories,id'],
+            'description' => ['required', 'string', 'min:3','max:200'],
+            'author' => ['required', 'string', 'min:2','max:30'],
+            'status' => ['required', 'string', 'min:5', 'max:7'],
+            'image' => ['nullable', 'image', 'mimes:jpg,png'],
+            'released_at' => ['required', 'date']
         ];
     }
 }

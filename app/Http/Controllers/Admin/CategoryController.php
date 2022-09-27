@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Categories\CreateRequest;
+use App\Http\Requests\Categories\EditRequest;
 use App\Models\Category;
 use App\Queries\CategoryQueryBuilder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -37,23 +40,25 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CreateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request, CategoryQueryBuilder $builder) : RedirectResponse
     {
        // dd($request);
-        $request->validate([
-            'title' => ['required', 'string', 'min:5', 'max:150']
-        ]);
+        // $request->validate([
+        //     'title' => ['required', 'string', 'min:5', 'max:150']
+        // ]);
         //dd($request);
         // $data= $request->only(['title', 'description']);
 
-        $category = new Category();
+        $category = $builder->create(
+            $request->validated());
+        // $category = new Category();
         // $news->title = $data['title'];
-        $category->title = $request->input('title');
-        // $news->description = $data['description'];
-        $category->description =  $request->input('description');
+        // $category->title = $request->input('title');
+        // // $news->description = $data['description'];
+        // $category->description =  $request->input('description');
         // return response()->json($request->only(['title', 'description'] ));
         if($category->save()) {
             return redirect()->route('admin.categories.index')->with('success', 'Запись успешно добавлена');
@@ -95,12 +100,14 @@ class CategoryController extends Controller
      * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(EditRequest $request, Category $category, CategoryQueryBuilder $builder) : RedirectResponse
     {
         
-        $category->title = $request->input('title');
+        // $category->title = $request->input('title');
        
-        $category->description = $request->input('description');
+        // $category->description = $request->input('description');
+
+        $category = $category->fill($request->validated());
        
         if($category->save()) {
             

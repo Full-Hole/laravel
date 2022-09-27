@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\News\CreateRequest;
+use App\Http\Requests\News\EditRequest;
 use App\Models\Category;
 use App\Models\News;
 use App\Queries\NewsQueryBuilder;
@@ -42,14 +44,14 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, NewsQueryBuilder $builder)
+    public function store(CreateRequest $request, NewsQueryBuilder $builder) : RedirectResponse
     {
-        $request->validate([
-            'title' => ['required', 'string', 'min:5', 'max:150']
-        ]);
+        // $request->validate([
+        //     'title' => ['required', 'string', 'min:5', 'max:150']
+        // ]);
 
         $news = $builder->create(
-            $request->only(['title','description','category_id','author','status','image','released_at'])
+            $request->validated()
         );
 
         
@@ -106,7 +108,7 @@ class NewsController extends Controller
      * @param  News  $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news, NewsQueryBuilder $builder): RedirectResponse 
+    public function update(EditRequest $request, News $news, NewsQueryBuilder $builder): RedirectResponse 
     {
        
     //     $news->title = $request->input('title');
@@ -119,7 +121,8 @@ class NewsController extends Controller
     //     $news->released_at = strtotime($request ->input("release"));
         if($builder->update(
             $news,
-            $request->only(['title','description','category_id','author','status','image','released_at']))) {
+            $request->validated()))
+            {
             return redirect()->route('admin.news.index')->with('success', 'Запись успешно обновлена');
         }
         return back()->with('error', 'Не удалось обновить запись');
@@ -134,7 +137,7 @@ class NewsController extends Controller
      */
     public function destroy(int $id, NewsQueryBuilder $builder)
     {
-        dd('123');
+        //dd('123');
         if($builder->delete($id))
             return back()->with('success', 'Запись успешно удалена');
 
