@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.101.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Dashboard Template · Bootstrap v5.2</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
@@ -95,9 +96,10 @@
 
     <script src="{{ asset('assets/js/feather.min.js') }}">
     </script>
-    <script src="{{ asset('assets/js/Chart.min.js') }}">
-    </script>
-    <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/Chart.min.js') }}">
+    </script> --}}
+    {{-- <script src="{{ asset('assets/js/dashboard.js') }}"></script> --}}
+    @stack('js')
 </body>
 
 </html>
