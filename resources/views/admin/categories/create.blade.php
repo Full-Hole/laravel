@@ -1,11 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <h2>Добавить Категорию</h2>
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            @include('inc.message', ['vmessage' => $error])
-        @endforeach
-    @endif
+    @include('inc.message')
     <div class="offset-2 col-8">
         <form method="post" action="{{ route('admin.categories.store') }}">
             @csrf
